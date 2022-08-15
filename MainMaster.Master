@@ -1,0 +1,209 @@
+﻿<%@ Master Language="C#"  AutoEventWireup="true" CodeBehind="MainMaster.master.cs" Inherits="FD_1.MainMaster" %>
+
+<!DOCTYPE html>
+
+<%--http://www.w3.org/1999/xhtml--%>
+<html>
+<head runat="server">
+    <title></title>
+
+    <%--bootstrap css--%>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="bootstrap/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="bootstrap/js/popper.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <%--datatable css--%>
+    <link href="datatable/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <%--fontawesome css--%>
+    <link href="fontawesome/css/all.css" rel="stylesheet" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <%--this sqldatasource contain storeProcedure-totalPiceCart for the getting the total price and count of product of cart--%>
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:FD_1ConnectionString %>" SelectCommand="totalPriceCart" SelectCommandType="StoredProcedure">
+                    <SelectParameters>
+                        <asp:SessionParameter Name="email" SessionField="CustomerIn" Type="String" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+
+            <div class="sticky-top">
+            <%-- Search bar --%>
+            <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center" style="background-color: white;">
+                <a class="navbar-brand d-flex w-50 mr-auto" href="MainMasterWebForm.aspx">
+                    <img src="img/logo_large_Size.png" width="30" height="30" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+                    <ul class="navbar-nav w-100 justify-content-center">
+                        <li class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" style="width: 70%;" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn btn-success my-sm-0" type="submit">Search</button>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                        <li class="nav-item">
+                            <asp:HyperLink ID="signin" runat="server" class="nav-link" NavigateUrl="~/SignIn.aspx" Visible="True">Sign In</asp:HyperLink>
+                        </li>
+                         <li class="nav-item">
+                            <asp:HyperLink ID="registration" runat="server" class="nav-link" NavigateUrl="~/Registration.aspx" Visible="True">Registration</asp:HyperLink>
+                        </li>
+                        <li class="nav-item">
+                            <asp:DataList ID="DataList1" runat="server" DataSourceID="SqlDataSource2">
+                                <ItemTemplate>
+                                    <%--totalPrice:
+                                    <asp:Label ID="totalPriceLabel" runat="server" Text='<%# Eval("totalPrice") %>' ></asp:Label>
+                                    <br />
+                                    ProductCount:--%>
+                                    <asp:Label ID="ProductCountLabel" runat="server" class="nav-link font-weight-bold" Text='<%# Eval("ProductCount") %>' ForeColor="black" />
+                                </ItemTemplate>
+                            </asp:DataList>
+                        </li>
+                         <li class="nav-item">
+                            <asp:HyperLink ID="cartDetailText" runat="server" class="nav-link" NavigateUrl="~/CartDetail.aspx" Visible="True"><i class="fa fa-shopping-cart" aria-hidden="true" style="Color:black;"></i></asp:HyperLink>
+                        </li>
+                         <li class="nav-item">
+                            <asp:HyperLink ID="YourOrder" runat="server" class="nav-link text-success font-weight-bold" Visible="True" NavigateUrl="~/OrderDetail.aspx">Order</asp:HyperLink>
+                        </li>
+                         <li class="nav-item">
+                            <asp:HyperLink ID="Uname" runat="server" class="nav-link" Visible="True">UName</asp:HyperLink>
+                        </li>
+                         <li class="nav-item pt-1">
+                             <asp:Button ID="BtnSignOut" runat="server" Text="SignOut" class="btn btn-outline-danger btn-sm" OnClick="BtnSignOut_Click" CausesValidation="False" />
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <%-- End Search bar --%>
+
+
+            <%--catogery bar--%>
+            <nav class="navbar navbar-light navbar-expand-sm" style="background-color: #e3f2fd;">
+                <div class="mx-auto d-sm-flex d-block flex-sm-nowrap">
+                    <a class="navbar-brand" href="#">All Categories</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse text-center" id="navbarsExample11">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">GROCERY
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <%--<asp:HyperLink ID="Dals" class="dropdown-item" runat="server">Dals</asp:HyperLink>--%>
+                                    <asp:LinkButton ID="LinkButton1" class="dropdown-item" runat="server" OnClick="Dals_select">Dals</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton2" class="dropdown-item" runat="server" OnClick="Pulses_select">Pulses</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton3" class="dropdown-item" runat="server" OnClick="DryFruits_select">Dry Fruits</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton4" class="dropdown-item" runat="server">Cooking Oil</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton5" class="dropdown-item" runat="server">Milk</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton6" class="dropdown-item" runat="server">Ghee</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton7" class="dropdown-item" runat="server">Flours & Grains</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton8" class="dropdown-item" runat="server">Rice</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton9" class="dropdown-item" runat="server">Masala & Spices</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton10" class="dropdown-item" runat="server">Salt / Sugar </asp:LinkButton>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PACKAGED FOOD
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <asp:LinkButton ID="LinkButton11" class="dropdown-item" runat="server" OnClick="Biscuits_Cookies">Biscuits & Cookies</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton12" class="dropdown-item" runat="server">Snacks & Farsans</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton13" class="dropdown-item" runat="server">Chocolates</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton14" class="dropdown-item" runat="server">Ketchup & Sauce</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton15" class="dropdown-item" runat="server">Jams & Spreads</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton16" class="dropdown-item" runat="server">Pasta & Noodless</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton17" class="dropdown-item" runat="server">Soups</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton18" class="dropdown-item" runat="server">Bakery</asp:LinkButton>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Detergent & Fabric Care
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <asp:LinkButton ID="LinkButton19" class="dropdown-item" runat="server">Cleaners</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton20" class="dropdown-item" runat="server">Tissue Paper & Napkins</asp:LinkButton>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PERSONAL CARE
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <asp:LinkButton ID="LinkButton21" class="dropdown-item" runat="server">Skin Care</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton22" class="dropdown-item" runat="server">Face Care</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton23" class="dropdown-item" runat="server">Hair Care </asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton24" class="dropdown-item" runat="server">Oral Care</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton25" class="dropdown-item" runat="server">Sanitary Napkins</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton26" class="dropdown-item" runat="server">Deos & Perfumes</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton28" class="dropdown-item" runat="server">Shaving Needs</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton29" class="dropdown-item" runat="server">Baby Care</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton30" class="dropdown-item" runat="server">Diapers & Wipes</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton31" class="dropdown-item" runat="server">Health & Wellness</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton32" class="dropdown-item" runat="server">Personal Hygiene</asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton33" class="dropdown-item" runat="server">Beauty Products</asp:LinkButton>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <%--end catogery bar--%>
+            </div>
+
+            <%--main content placeholder--%>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            <%--end main content placeholder--%>
+
+            <%--footer--%>
+            <div style="background-color: gray; color:white;">
+                <div class="container mt-3">
+                <div class="row bg-gradient-light p-5">
+                    <div class="col-lg-4 col-sm-4">
+                        <a href="#">
+                            <img src="img/logo.png" width="250" height="200" alt=""></a>
+                    </div>
+                    <div class="col-lg-4 col-sm-4">
+                        <h1>Our Link</h1>
+                        <ul style="list-style:none;">
+                            <li>An item</li><br/>
+                            <li>A second item</li><br/>
+                            <li>A third item</li><br/>
+                            <li>A fourth item</li><br/>
+                            <li>And a fifth one</li><br/>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-sm-4">
+                        <h1>Contact</h1>
+                         <address>A second itemA second<br/> itemA second itemA<br/>  second item </address>   
+                    </div>
+                </div>
+                    <div class="row bg-gradient-light">
+                    <div class="col-lg-12 col-sm-12">
+                        <h1>Map</h1>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.6179144934517!2d72.99639441500673!3d19.08052965678813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c133e6308dfb%3A0xe140c61626c792eb!2sShabri!5e0!3m2!1sen!2sin!4v1619971859699!5m2!1sen!2sin" 
+                            width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                    <hr style="border:1px solid white;"/>
+                    <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                        <p style="text-align:center;">Copy Wright @chandehrishikesh </p>    
+                    </div>
+                </div>
+                </div>
+            </div>
+            <%--footer--%>
+        </div>
+    </form>
+
+</body>
+</html>
