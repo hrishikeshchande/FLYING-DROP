@@ -1,0 +1,169 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="adminMaster.master.cs" Inherits="FD_1.admin.adminMaster" %>
+
+<!DOCTYPE html>
+<%--http://www.w3.org/1999/xhtml--%>
+<html xmlns="">
+<head runat="server">
+    <title></title>
+
+    <%--bootstrap css--%>
+    <link href="\bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="\bootstrap/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="\bootstrap/js/popper.min.js"></script>
+    <script src="\bootstrap/js/bootstrap.min.js"></script>
+
+    <%--datatable css--%>
+    <link href="\datatable/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <%--fontawesome css--%>
+    <link href="\fontawesome/css/all.css" rel="stylesheet" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+
+            <div class="sticky-top">
+                <%-- Search bar --%>
+                <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center" style="background-color: white;">
+                    <a class="navbar-brand d-flex w-50 mr-auto" href="adminSignIn.aspx">
+                        <img src="\img/logo_large_Size.png" width="30" height="30" alt="">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+                        <ul class="navbar-nav w-100 justify-content-center">
+                            <li class="form-inline my-2 my-lg-0">
+                                <input class="form-control mr-sm-2" style="width: 70%;" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn btn-success my-sm-0" type="submit">Search</button>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                            <li class="nav-item">
+                                <asp:HyperLink ID="signin" runat="server" class="nav-link" NavigateUrl="~/admin/adminSignIn.aspx" Visible="True">Sign In</asp:HyperLink>
+                            </li>
+                            <li class="nav-item">
+                                <asp:HyperLink ID="registration" runat="server" class="nav-link" NavigateUrl="~/admin/adminRegistration.aspx" Visible="True">Registration</asp:HyperLink>
+                            </li>
+                            <li class="nav-item">
+                                <asp:HyperLink ID="Uname" runat="server" class="nav-link" Visible="True">UName</asp:HyperLink>
+                            </li>
+                            <li class="nav-item pt-1">
+                                <asp:Button ID="BtnSignOut" runat="server" Text="SignOut" class="btn btn-outline-danger btn-sm" OnClick="BtnSignOut_Click" CausesValidation="False" />
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <%-- End Search bar --%>
+
+
+                <%--catogery bar--%>
+                <asp:Label ID="OperationMenu" runat="server" Text="Label">
+
+                    <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e3f2fd;">
+                        <div class="mx-auto d-sm-flex d-block flex-sm-nowrap">
+                            <a class="navbar-brand" href="#">All Management</a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse text-center" id="navbarsExample11">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accouts
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <asp:HyperLink class="dropdown-item" ID="HyperLink2" runat="server" NavigateUrl="~/admin/AdminDetail.aspx">Admin</asp:HyperLink>
+                                            <asp:HyperLink class="dropdown-item" ID="HyperLink1" runat="server" NavigateUrl="~/admin/CustomerDetail.aspx">Customer</asp:HyperLink>
+                                            <asp:HyperLink class="dropdown-item" ID="HyperLink3" runat="server" NavigateUrl="~/admin/ShopDetail.aspx">Shop</asp:HyperLink>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <asp:HyperLink class="dropdown-item" ID="HyperLink4" runat="server" NavigateUrl="~/admin/AdminProductDetail.aspx">Add Product</asp:HyperLink>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <asp:HyperLink ID="AdminOrderDetail" CssClass="nav-link"  runat="server" NavigateUrl="~/admin/AdminCartDetail.aspx">Cart Detail</asp:HyperLink>
+                                    </li>
+                                    <li class="nav-item">
+                                        <asp:HyperLink ID="AdminCartDetail" CssClass="nav-link" runat="server" NavigateUrl="~/admin/AdminOrderDetail.aspx">Order Detail</asp:HyperLink>
+                                        <%--<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Snacks & Branded Foods
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="#">Biscuits</a>
+                                            <a class="dropdown-item" href="#">Noodles</a>
+                                            <a class="dropdown-item" href="#">Snakes</a>
+                                        </div>--%>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+
+                </asp:Label>
+                <%--end catogery bar--%>
+            </div>
+
+            <%--main content placeholder--%>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+
+            <%--end main content placeholder--%>
+
+            <%--footer--%>
+            <div style="background-color: gray; color: white;">
+                <div class="container mt-3">
+                    <div class="row bg-gradient-light p-5">
+                        <div class="col-lg-4 col-sm-4">
+                            <a href="#">
+                                <img src="\img/logo.png" width="250" height="200" alt=""></a>
+                        </div>
+                        <div class="col-lg-4 col-sm-4">
+                            <h1>Our Link</h1>
+                            <ul style="list-style: none;">
+                                <li>An item</li>
+                                <br />
+                                <li>A second item</li>
+                                <br />
+                                <li>A third item</li>
+                                <br />
+                                <li>A fourth item</li>
+                                <br />
+                                <li>And a fifth one</li>
+                                <br />
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-sm-4">
+                            <h1>Contact</h1>
+                            <address>A second itemA second<br />
+                                itemA second itemA<br />
+                                second item </address>
+                        </div>
+                    </div>
+                    <div class="row bg-gradient-light">
+                        <div class="col-lg-12 col-sm-12">
+                            <h1>Map</h1>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.6179144934517!2d72.99639441500673!3d19.08052965678813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c133e6308dfb%3A0xe140c61626c792eb!2sShabri!5e0!3m2!1sen!2sin!4v1619971859699!5m2!1sen!2sin"
+                                width="100%" height="250" style="border: 0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <hr style="border: 1px solid white;" />
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12">
+                            <p style="text-align: center;">Copy Wright @chandehrishikesh </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%--footer--%>
+        </div>
+
+    </form>
+</body>
+</html>
