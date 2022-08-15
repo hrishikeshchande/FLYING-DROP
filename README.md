@@ -30,8 +30,16 @@ o Flying Drop work flow -  Site -> Product Seller -> Same Location -> Quick Deli
 
 
 #Responsive
+
 ![image](https://user-images.githubusercontent.com/67309430/184624940-fdff2516-71e8-4acc-aeae-9813c7e40ea2.png)
+
 ![image](https://user-images.githubusercontent.com/67309430/184624969-81766019-9013-4631-b3a8-35b7a90dc0ed.png)
+
 ![image](https://user-images.githubusercontent.com/67309430/184624993-b8270edf-c787-4d83-9d87-5633e071cbe7.png)
 
+
+
+#Databased Table
+
+![image](https://user-images.githubusercontent.com/67309430/184625125-70171463-fb09-41de-a28f-e0bb3f3ae92d.png)
 
